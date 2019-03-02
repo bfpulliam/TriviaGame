@@ -16,31 +16,26 @@
 </head>
 
 <body>
+    <!-- the left-hand column inluding the image and timer -->
 
-    <div class="container" id="gameScreen">
+    
 
-
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h2 id="timer">Time:</h2>
-                <h1 class="display-4">Question: </h1>
-                <br>
-                <button type="button" class="btn btn-primary" id="a"></button>
-                <button type="button" class="btn btn-primary" id="b"></button>
-                <button type="button" class="btn btn-primary" id="c"></button>
-                <button type="button" class="btn btn-primary" id="d"></button>
-            </div>
-            <br><br>
-            <div class="container">
-                <h2>Score Board</h2>
-                <h3 id="wins">Wins:</h3>
-                <h3 id="fails">Fails: </h3>
-            </div>
+    <!-- the right-hand column that displays questions and answers -->
+    <div class="info-container">
+        <div class="container question">Question:</div>
+        <div class="answerbtns">
+            <div class="button answer-1"></div>
+            <div class="button answer-2"></div>
+            <div class="button answer-3"></div>
+            <div class="button answer-4"></div>
         </div>
-
-
-
     </div>
+    
+    <div class="time-display">
+        <p class="timer-text">Time:</p>
+        <div class="timer"></div>
+    </div>
+
     <!-- Bootstraps src -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
