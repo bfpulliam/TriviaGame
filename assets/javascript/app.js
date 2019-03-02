@@ -1,161 +1,143 @@
-
-	var question = 0;
-	var time = 0;
-	var wins = 0;
-	var fails = 0;
-
-	var questions = [
-		{
-			question:
-				"Which hit song featured the following lyric - 'Get away from the pain that you drive into the heart of me'",
-			answers: {
-				a: "Run to you",
-				b: "Last Christmas",
-				c: "Teardrops",
-				d: "Tainted love"
-			},
-			correctAnswer: "Tainted Love"
-		},
-		{
-			question:
-				"Who sang the title track of the late 80s James Bond film - Licence to Kill?",
-			answers: {
-				a: "Tina Turner",
-				b: "Patti LaBelle",
-				c: "Gladys Knight",
-				d: "Shirley Bassey"
-			},
-			correctAnswer: "Gladys Knight"
-		},
-		{
-			question:
-				"The Magic Number was a 1989 hit for the band De La Soul. Which album of theirs did it appear on?",
-			answers: {
-				a: "3 Feet High and Rising",
-				b: "Buhloone Mindstate",
-				c: "De La Soul is Dead",
-				d: "The Grind State"
-			},
-			correctAnswer: "3 Feet High and Rising"
-		},
-		{
-			question:
-				"Which 80s Clash song, when re-released in 1991, and became a hit -even in Spanish?",
-			answers: {
-				a: "London Calling",
-				b: "Straight to Hell",
-				c: "Rock the Casbah",
-				d: "Should I Stay or Should I Go?"
-			},
-			correctAnswer: "Should I stay or Should I Go?"
-		}
-	];
-
-	forEach (var i = 0; i < questions.length; i++;) {
-	
-	
-			$("#questionDiv").text(questions.question[i]);
-			$("#a").text(questions.question[i].answers.a);
-			$("#b").text(questions.question[i].answers.b);
-			$("#c").text(questions.question[i].answers.c);
-			$("#d").text(questions.question[i].answers.d);
+var intervalId;
+var questCounter = 0;
+var answeredCorrect = 0;
+var answeredWrong = 0;
+var unAnswered = 0;
+var currentQuestion;
+var allQuestions = [
+	{
+		questionText: "Which hit song featured the following lyric - 'Get away from the pain that you drive into the heart of me'",
+		answer1: "Run to you",
+		answer2: "Last Christmas",
+		answer3: "Teardrops",
+		answer4: "Tainted love",
+		correctAnswer: "Tainted Love"
+	},
+	{
+		question: "Who sang the title track of the late 80s James Bond film - Licence to Kill?",
+		answer1: "Tina Turner",
+		answer2: "Patti LaBelle",
+		answer3: "Gladys Knight",
+		answer4: "Shirley Bassey",
+		correctAnswer: "Gladys Knight"
+	},
+	{
+		question: "The Magic Number was a 1989 hit for the band De La Soul. Which album of theirs did it appear on?",
+		answer1: "3 Feet High and Rising",
+		answer2: "Buhloone Mindstate",
+		answer3: "De La Soul is Dead",
+		answer4: "The Grind State",
+		correctAnswer: "3 Feet High and Rising"
+	},
+	{
+		question: "Which 80s Clash song, when re-released in 1991, and became a hit -even in Spanish?",
+		answer1: "London Calling",
+		answer2: "Straight to Hell",
+		answer3: "Rock the Casbah",
+		answer4: "Should I Stay or Should I Go?",
+		correctAnswer: "Should I stay or Should I Go?"
 	};
-		
-		var correctAnswer = questions.question[i].correctAnswer;
-
-		function questionContent() {
-		if (text === correctAnswer) {
-			$("#gameScreen").text("<p>" + "You got it right!");
-			wins++;
-			$("#win").text(wins);
-			$("#gameScreen").append("<p>The answer was" + correctAnswer);
-			setInterval(nextQuestion, 4000);
-			question++;
-		} else {
-			$("#gameScreen").text("<p>" + "Nope, that's not it!");
-			fails++;
-			$("#gameScreen").append("<p>The answer was" + correctAnswer);
-			setInterval(nextQuestion, 4000);
-			questionCounter++;
-		}
-	}
-
-	function userTimeout() {
-		if (time === 0) {
-			alert("You ran out of time!");
-			fails++;
-			$("#gameScreen").append("<p>The answer was" + correctAnswer);
-			setTimeout(nextQuestion, 4000);
-			questionCounter++;
-		}
-	}
-
-	function resultsScreen() {
-		if (wins => questions.length) {
-			alert("Great job!!");
-		} else {
-			alert(
-				"Hey man, I know the feeling.  I am on the struggle bus too!"
-			);
-
-			$("#gameScreen").append("Start Over?");
-			gameReset();
-			$("#start").click(nextQuestion);
-		}
-	}
-
-	(function timer(){
-    var timeleft = 5;
-    setInterval(function() {
- 	 timeleft--;
- 	 if (timeleft >= 0) {
-        span = document.getElementById("timer");
-        span.innerHTML = (timeleft + "seconds left");
- 	 };
-    }, 1000);
-})();
-	function nextQuestion() {
-		if (question[i] < questions.length) {
-			time = 15;
-			$("#gameScreen").text(time + " seconds left!");
-			questionContent();
-			timer();
-			userTimeout();
-		} else {
-			resultsScreen();
-		}
-	}
-
-	function gameReset() {
-		time = 0;
-		wins = 0;
-		fails = 0;
-		question = 0;
-		startGame();
-	}
+];
+var questionsLength = allQuestions.length;
+function correctAnswer(){
+	$(".button").off("click");
+	$(".answerbtns").hide();
+	questCounter++;
+	answeredCorrect++;
+	clearInterval(intervalId);
+	if ( questCounter == questionsLength){  
+		setTimeout(endScreen, 1000 * 4);
+	} else {
+		setTimeout(displayQuestion, 1000 * 4);
+}
+};
+function wrongAnswer(){
+	$(".button").off("click");
+	$(".answerbtns").hide();
+	$(".question").text("Wrong Answer!");
+	questCounter++;
+	answeredWrong++
+	clearInterval(intervalId);
+	if ( questCounter == questionsLength){
+		setTimeout(endScreen, 1000 * 2);
+	} else {
+		setTimeout(displayQuestion, 1000 * 2);
 	};
-
-	function startGame() {
-		$("#gameScreen").text(time + " seconds left!");
-		questionContent();
-		timer();
-		userTimeout();
-	}
-
 	
-
-	$("#gameScreen").on("click", ".answers", function() {
-		var userGuess = $(this).text();
-		if (userGuess === questions.question[i].correctAnswer) {
-			clearInterval(clock);
-			userWin();
-		} else {
-			clearInterval(clock);
-			userLoss();
-		}
+};
+function noTime(){
+	$(".button").off("click");
+	$(".question").text("Time's Up!");
+	$(".answerbtns").hide();
+	questCounter++;
+	unAnswered++
+	clearInterval(intervalId);
+	if ( questCounter == questionsLength){
+		setTimeout(endScreen, 1000 * 2);
+	} else {
+		setTimeout(displayQuestion, 1000 * 2);
+	};
+};
+function endScreen(){
+	$(".answerbtns").show();
+	$(".question").text("That's the end of the game! Here's how you did:");
+	$(".answer-1").text("Correct answers: " + answeredCorrect );
+	$(".answer-2").text("Wrong answers: " + answeredWrong );
+	$(".answer-3").text("Unanswered: " + unAnswered );
+	$(".answer-4").text(" Click Here To Play Again");
+	$(".answer-4").on("click", function(){
+		gameReset();
+		displayQuestion();
+ 	});
+};
+function gameReset() {
+	 questCounter = 0;
+	 answeredCorrect = 0;
+	 answeredWrong = 0;
+	 unAnswered = 0;
+	 return questCounter;
+	 return answeredCorrect;
+	 return answeredWrong;
+	 return unAnswered;
+};
+function displayQuestion() {
+	var timer = 11;
+	//decrease timer and display it on screen in the timer div
+	intervalId = setInterval(decrement, 1000);
+	function decrement() {
+      timer--;
+      $(".timer").html(timer);
+      if (timer === 0) {
+      	noTime();
+      };
+  	};
+   	
+	$(".button").off("click"); 
+	//display and style the current question
+	$(".question").text(allQuestions[questCounter].questionText);
+	//show all the buttons and their answers
+	$(".answerbtns").show();
+	$(".answer-1").text(allQuestions[questCounter].answer1);
+	$(".answer-2").text(allQuestions[questCounter].answer2);
+	$(".answer-3").text(allQuestions[questCounter].answer3);
+	$(".answer-4").text(allQuestions[questCounter].answer4);
+	$(".button").on("click", function(){
+	 	if ($(this).text() == allQuestions[questCounter].correctAnswer){
+	 		correctAnswer();
+	 	} else {
+	 		wrongAnswer();
+	 	}
+ 	});
+};
+$(document).ready(function() {
+	$(".answer-1").text("Click Here To Start!");
+	$(".answer-2").hide();
+	$(".answer-3").hide();
+	$(".answer-4").hide();
+	$(".button").on("click", function(){
+		$(".answer-2").show();
+		$(".answer-3").show();
+		$(".answer-4").show();
+		displayQuestion();
 	});
-
-	
-
-
-
+});
