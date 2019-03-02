@@ -2,7 +2,6 @@ var intervalId;
 var questCounter = 0;
 var answeredCorrect = 0;
 var answeredWrong = 0;
-var unAnswered = 0;
 var currentQuestion;
 var allQuestions = [
 	{
@@ -51,30 +50,25 @@ function correctAnswer(){
 		setTimeout(displayQuestion, 1000 * 4);
 	};
 };
-
-// Function that is called on a wrong answer.  Hides buttons, displays "Wrong Answer!", increments the appropriate counters, and checks to see if max number off questions has been reached.  If questCounter == questionsLength, then the game if over and endScreen() is called.  If not, then a new questions is displayed.
 function wrongAnswer(){
 	$(".button").off("click");
 	$(".answerbtns").hide();
 	$(".question").text("Wrong Answer!");
 	questCounter++;
-	answeredWrong++
+	answeredWrong++;
 	clearInterval(intervalId);
 	if ( questCounter == questionsLength){
 		setTimeout(endScreen, 1000 * 2);
 	} else {
 		setTimeout(displayQuestion, 1000 * 2);
-	}
-	
+	};
 };
-
-// Function that is called when the 11second timer runs out.  Hides buttons, displays "Time's Up!", increments the appropriate counters, and checks to see if max number off questions has been reached.  If questCounter == questionsLength, then the game if over and endScreen() is called.  If not, then a new questions is displayed.
 function noTime(){
 	$(".button").off("click");
 	$(".question").text("Time's Up!");
 	$(".answerbtns").hide();
 	questCounter++;
-	unAnswered++
+	answeredWrong++;
 	clearInterval(intervalId);
 	if ( questCounter == questionsLength){
 		setTimeout(endScreen, 1000 * 2);
@@ -87,7 +81,7 @@ function endScreen(){
 	$(".question").text("That's the end of the game! Here's how you did:");
 	$(".answer-1").text("Correct answers: " + answeredCorrect );
 	$(".answer-2").text("Wrong answers: " + answeredWrong );
-	$(".answer-3").text("Unanswered: " + unAnswered );
+	$(".answer-3").text(" ");
 	$(".answer-4").text(" Click Here To Play Again");
 	$(".answer-4").on("click", function(){
 		gameReset();
@@ -98,28 +92,23 @@ function gameReset() {
 	 questCounter = 0;
 	 answeredCorrect = 0;
 	 answeredWrong = 0;
-	 unAnswered = 0;
 	 return questCounter;
 	 return answeredCorrect;
 	 return answeredWrong;
-	 return unAnswered;
 };
 function displayQuestion() {
-	var timer = 11;
-	//decrease timer and display it on screen in the timer div
+	var timer = 10;
+	
 	intervalId = setInterval(decrement, 1000);
 	function decrement() {
       timer--;
-      $(".timer").html(timer);
+      $(".timer-text").text("Time:" + timer);
       if (timer === 0) {
       	noTime();
       };
   	};
-   	
 	$(".button").off("click"); 
-	//display and style the current question
 	$(".question").text(allQuestions[questCounter].questionText);
-	//show all the buttons and their answers
 	$(".answerbtns").show();
 	$(".answer-1").text(allQuestions[questCounter].answer1);
 	$(".answer-2").text(allQuestions[questCounter].answer2);
@@ -134,11 +123,14 @@ function displayQuestion() {
  	});
 };
 $(document).ready(function() {
-	$(".answer-1").text("Start!");
+	$(".btn-danger").text("Click here to Start!");
+	$(".answer-1").hide();
 	$(".answer-2").hide();
 	$(".answer-3").hide();
 	$(".answer-4").hide();
 	$(".button").on("click", function(){
+		$(".btn-danger").hide();
+		$(".answer-1").show();
 		$(".answer-2").show();
 		$(".answer-3").show();
 		$(".answer-4").show();
