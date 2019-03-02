@@ -36,18 +36,9 @@ var allQuestions = [
 		answer3: "Rock the Casbah",
 		answer4: "Should I Stay or Should I Go?",
 		correctAnswer: "Should I stay or Should I Go?"
-<<<<<<< HEAD
 	}
 ];
 var questionsLength = allQuestions.length;
-
-
-// Function called when an answered is guessed correctly.  Hides buttons, displays further info on the correct guess, increments the appropriate counters, and checks to see if max number off questions has been reached.  If questCounter == questionsLength, then the game if over and endScreen() is called.  If not, then a new questions is displayed.
-=======
-	};
-];
-var questionsLength = allQuestions.length;
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
 function correctAnswer(){
 	$(".button").off("click");
 	$(".answerbtns").hide();
@@ -58,7 +49,6 @@ function correctAnswer(){
 		setTimeout(endScreen, 1000 * 4);
 	} else {
 		setTimeout(displayQuestion, 1000 * 4);
-<<<<<<< HEAD
 	};
 };
 
@@ -79,24 +69,6 @@ function wrongAnswer(){
 };
 
 // Function that is called when the 11second timer runs out.  Hides buttons, displays "Time's Up!", increments the appropriate counters, and checks to see if max number off questions has been reached.  If questCounter == questionsLength, then the game if over and endScreen() is called.  If not, then a new questions is displayed.
-=======
-}
-};
-function wrongAnswer(){
-	$(".button").off("click");
-	$(".answerbtns").hide();
-	$(".question").text("Wrong Answer!");
-	questCounter++;
-	answeredWrong++
-	clearInterval(intervalId);
-	if ( questCounter == questionsLength){
-		setTimeout(endScreen, 1000 * 2);
-	} else {
-		setTimeout(displayQuestion, 1000 * 2);
-	};
-	
-};
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
 function noTime(){
 	$(".button").off("click");
 	$(".question").text("Time's Up!");
@@ -110,11 +82,6 @@ function noTime(){
 		setTimeout(displayQuestion, 1000 * 2);
 	};
 };
-<<<<<<< HEAD
-
-//Function that is called when all questions have been answered.  Plays the Monday Night Football theme and displays the users stats.  If they click the 'Play again' button, stats are reset, the music stops, and the first questions is displayed 
-=======
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
 function endScreen(){
 	$(".answerbtns").show();
 	$(".question").text("That's the end of the game! Here's how you did:");
@@ -127,50 +94,28 @@ function endScreen(){
 		displayQuestion();
  	});
 };
-<<<<<<< HEAD
-//function called if the user clicks "play again" on the end screen.  Resets all pertinent variable to 0
-=======
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
 function gameReset() {
 	 questCounter = 0;
 	 answeredCorrect = 0;
 	 answeredWrong = 0;
 	 unAnswered = 0;
-<<<<<<< HEAD
-
-=======
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
 	 return questCounter;
 	 return answeredCorrect;
 	 return answeredWrong;
 	 return unAnswered;
 };
-<<<<<<< HEAD
-//function that displays the timer and the current question (based on questCounter)
 function displayQuestion() {
-	
-=======
-function displayQuestion() {
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
 	var timer = 11;
 	//decrease timer and display it on screen in the timer div
 	intervalId = setInterval(decrement, 1000);
 	function decrement() {
       timer--;
       $(".timer").html(timer);
-<<<<<<< HEAD
-      // if the timer reaches 0, call noTime()
-=======
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
       if (timer === 0) {
       	noTime();
       };
   	};
-<<<<<<< HEAD
-   	//added this as it seemed like the previous click was getting carried over
-=======
    	
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
 	$(".button").off("click"); 
 	//display and style the current question
 	$(".question").text(allQuestions[questCounter].questionText);
@@ -180,10 +125,6 @@ function displayQuestion() {
 	$(".answer-2").text(allQuestions[questCounter].answer2);
 	$(".answer-3").text(allQuestions[questCounter].answer3);
 	$(".answer-4").text(allQuestions[questCounter].answer4);
-<<<<<<< HEAD
-	//display correctAnswer() or wrongAnswer() depending on if the text for the button clicked matches the value of the correctAnswer
-=======
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
 	$(".button").on("click", function(){
 	 	if ($(this).text() == allQuestions[questCounter].correctAnswer){
 	 		correctAnswer();
@@ -192,12 +133,8 @@ function displayQuestion() {
 	 	}
  	});
 };
-<<<<<<< HEAD
-//display the start screen and display a questions once the button is clicked
-=======
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
 $(document).ready(function() {
-	$(".answer-1").text("Click Here To Start!");
+	$(".answer-1").text("Start!");
 	$(".answer-2").hide();
 	$(".answer-3").hide();
 	$(".answer-4").hide();
@@ -207,8 +144,4 @@ $(document).ready(function() {
 		$(".answer-4").show();
 		displayQuestion();
 	});
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 9ae852baa585677ff0441d9bef06ca06df90f6de
