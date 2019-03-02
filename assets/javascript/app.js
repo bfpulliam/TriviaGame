@@ -52,7 +52,7 @@ function correctAnswer(){
 		setTimeout(endScreen, 1000 * 4);
 	} else {
 		setTimeout(displayQuestion, 1000 * 4);
-	}
+	};
 };
 
 // Function that is called on a wrong answer.  Hides buttons, displays "Wrong Answer!", increments the appropriate counters, and checks to see if max number off questions has been reached.  If questCounter == questionsLength, then the game if over and endScreen() is called.  If not, then a new questions is displayed.
