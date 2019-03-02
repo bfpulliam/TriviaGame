@@ -104,20 +104,16 @@
 		}
 	}
 
-	function timer() {
-		clock = setInterval(countDown, 1000);
-		function countDown() {
-			if (time < 1) {
-				clearInterval(clock);
-				userTimeout();
-			}
-			if (time > 0) {
-				time--;
-			}
-			$("#timer").html("<strong>" + time + "</strong>");
-		}
-	}
-
+	(function timer(){
+    var timeleft = 5;
+    setInterval(function() {
+ 	 timeleft--;
+ 	 if (timeleft >= 0) {
+        span = document.getElementById("timer");
+        span.innerHTML = (timeleft + "seconds left");
+ 	 };
+    }, 1000);
+})();
 	function nextQuestion() {
 		if (question[i] < questions.length) {
 			time = 15;
